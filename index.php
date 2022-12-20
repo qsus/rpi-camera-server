@@ -18,7 +18,7 @@ if ($_POST["password"] != $env["password"]) {
 // Authentication is now done by apache! */
 
 foreach(scandir("videos", SCANDIR_SORT_ASCENDING) as $video) {
-	if ($video == ".." OR $video == ".") continue;
+	if ($video == ".." OR $video == "." OR $video == "git-store") continue;
 	
 	/* For every video:*/ ?>
 	
