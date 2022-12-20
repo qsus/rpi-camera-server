@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Videos"
+AuthUserFile "/PATH/TO/passwords"
+Require user USERNAME

@@ -1,0 +1,4 @@
+.htaccess
+passwords
+videos/*
+!videos/git-store
