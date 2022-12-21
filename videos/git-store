@@ -1,0 +1,3 @@
+Notes:
+* Folder videos/ is exclusively for videos in format .mov or .ogv, with the only exception being git-store file to make sure git stores that folder.
+* Video names must start with YYYY-MM-DD so PHP can filter them by time.
