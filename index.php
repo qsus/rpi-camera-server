@@ -23,12 +23,22 @@ foreach(scandir("videos", SCANDIR_SORT_ASCENDING) as $video) {
 	
 	/* For every video:*/ ?>
 	
-	<h2>
-		<a href="videos/<?php echo $video; ?>"><?php echo $video ?></a>
-		<sup><a href="videos/<?php echo $video; ?>" download>Stáhnout</a></sup>
-	</h2>
-	<video controls src="videos/<?php echo $video; ?>"></video>
+	<div class="video">
+		<h2>
+			<a href="videos/<?php echo $video; ?>"><?php echo $video ?></a>
+			<sup><a href="videos/<?php echo $video; ?>" download>Stáhnout</a></sup>
+		</h2>
+		<video controls src="videos/<?php echo $video; ?>"></video>
+	</div>
 
 <?php
-	/* End for every video */
-}  ?>
+}	/* End for every video */
+?>
+
+<style>
+.video {
+	display: inline-grid; /* inline-block */
+}
+</style>
+
+<!-- TODO: filter videos -->
