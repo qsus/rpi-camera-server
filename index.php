@@ -18,8 +18,18 @@ if ($_POST["password"] != $env["password"]) {
 // Authentication is now done by apache! */
 
 // You can change this to SCANDIR_SORT_DESCENDING
+$videos = array();
 foreach(scandir("videos", SCANDIR_SORT_ASCENDING) as $video) {
 	if ($video == ".." OR $video == "." OR $video == "git-store") continue;
+	
+	$year  = substr($video, 0, 4);
+	$month = substr($video, 5, 2);
+	$day   = substr($video, 8, 2);
+
+	# Create array for current day if it doesn't exist yet
+	if (!is_array($videos[$year][$month][$day]))
+		$videos[$year][$month][$day] = array();
+	array_push($videos[$year][$month][$day], $video);
 	
 	/* For every video:*/ ?>
 	
@@ -33,6 +43,11 @@ foreach(scandir("videos", SCANDIR_SORT_ASCENDING) as $video) {
 
 <?php
 }	/* End for every video */
+
+// debug list videos
+echo "<pre>";
+print_r($videos);
+echo "</pre>";
 ?>
 
 <style>
