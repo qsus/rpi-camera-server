@@ -17,9 +17,9 @@ if ($_POST["password"] != $env["password"]) {
 }
 // Authentication is now done by apache! */
 
-// You can change this to SCANDIR_SORT_DESCENDING
+// You can change this to SCANDIR_SORT_ASCENDING
 $videos = array();
-foreach(scandir("videos", SCANDIR_SORT_ASCENDING) as $video) {
+foreach(scandir("videos", SCANDIR_SORT_DESCENDING) as $video) {
 	if ($video == ".." OR $video == "." OR $video == "git-store") continue;
 	
 	$year  = substr($video, 0, 4);
