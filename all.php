@@ -13,7 +13,7 @@ foreach(scandir("videos", SCANDIR_SORT_DESCENDING) as $video) {
 			<a href="videos/<?php echo $video; ?>"><?php echo $video ?></a>
 			<sup><a href="videos/<?php echo $video; ?>" download>Stáhnout</a></sup>
 		</h2>
-		<video controls src="videos/<?php echo $video; ?>"></video>
+		<video controls src="videos/<?php echo $video; ?>" width=400></video>
 	</div>
 
 <?php
