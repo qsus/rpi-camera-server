@@ -1,22 +1,7 @@
+<a href="/all.php">All videos</a>
+
 <?php
-/*// Load .env
-$envFile = fopen(".env", "r");
-$envStr = fread($envFile, filesize(".env"));
-fclose($envFile);
-$envArr = array_filter(explode(PHP_EOL, $envStr));
-foreach($envArr as $envEntry) {
-	$envEntryArr = explode("=", $envEntry);
-	$env[$envEntryArr[0]] = $envEntryArr[1];
-}
-unset($envFile, $envStr, $envArr, $envEntry, $envEntryArr);
-// .env is now loaded
-
-if ($_POST["password"] != $env["password"]) {
-	header('Location: /?wrongpassword=true');
-	exit("The entered password is incorrect. Please do not try again, otherwise you could guess it.");
-}
-// Authentication is now done by apache! */
-
+# This loop creates array of all videos
 // You can change this to SCANDIR_SORT_ASCENDING
 $videos = array();
 foreach(scandir("videos", SCANDIR_SORT_DESCENDING) as $video) {
@@ -30,30 +15,35 @@ foreach(scandir("videos", SCANDIR_SORT_DESCENDING) as $video) {
 	if (!is_array($videos[$year][$month][$day]))
 		$videos[$year][$month][$day] = array();
 	array_push($videos[$year][$month][$day], $video);
-	
-	/* For every video:*/ ?>
-	
-	<div class="video">
-		<h2>
-			<a href="videos/<?php echo $video; ?>"><?php echo $video ?></a>
-			<sup><a href="videos/<?php echo $video; ?>" download>Stáhnout</a></sup>
-		</h2>
-		<video controls src="videos/<?php echo $video; ?>"></video>
-	</div>
-
-<?php
-}	/* End for every video */
+}
 
 // debug list videos
-echo "<pre>";
-print_r($videos);
-echo "</pre>";
+//echo "<pre>";
+//print_r($videos);
+//echo "</pre>";
 ?>
 
-<style>
-.video {
-	display: inline-grid; /* inline-block */
-}
-</style>
-
 <!-- TODO: filter videos -->
+<?php
+foreach($videos as $yearNumber => $year) {
+	echo "<li>".$yearNumber."<ul>";
+	foreach($year as $monthNumber => $month) {
+		echo "<li>".$yearNumber."-".$monthNumber."<ul>";
+		foreach($month as $dayNumber => $day) {
+			echo "<li>".$yearNumber."-".$monthNumber."-".$dayNumber."<ul>";
+			foreach($day as $video) {
+				echo "<li><a href='videos/$video' >$video</a>".
+					"<sup><a href='videos/$video' download>Download</a></sup>";
+				
+			}
+			echo "</ul>";
+		}
+		echo "</ul>";
+	}
+	echo "</ul>";
+}
+?>
+<style>
+ul {
+	margin: 0;
+</style>
