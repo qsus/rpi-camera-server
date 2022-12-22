@@ -1,7 +1,15 @@
-<a href="/all.php">All videos</a>
-
+<a href="/">HOME</a> <a href="/all.php">All videos</a><br>
+Showing list of all days.<br>
+<button id="showdays">Show individual videos</button>
+<script>
+document.getElementById("showdays").onclick = () => {
+	while (document.getElementsByClassName("day").length) {
+		document.getElementsByClassName("day")[0].className=""
+	}
+}
+</script>
 <?php
-# This loop creates array of all videos
+// This loop creates array of all videos
 // You can change this to SCANDIR_SORT_ASCENDING
 $videos = array();
 foreach(scandir("videos", SCANDIR_SORT_DESCENDING) as $video) {
@@ -30,7 +38,9 @@ foreach($videos as $yearNumber => $year) {
 	foreach($year as $monthNumber => $month) {
 		echo "<li>".$yearNumber."-".$monthNumber."<ul>";
 		foreach($month as $dayNumber => $day) {
-			echo "<li>".$yearNumber."-".$monthNumber."-".$dayNumber."<ul>";
+			echo "<li><a href='day.php?day=".$yearNumber."-".$monthNumber."-".$dayNumber."'>".
+											 $yearNumber."-".$monthNumber."-".$dayNumber."</a>";
+			echo "<ul class='day'>";
 			foreach($day as $video) {
 				echo "<li><a href='videos/$video' >$video</a>".
 					"<sup><a href='videos/$video' download>Download</a></sup>";
@@ -46,4 +56,8 @@ foreach($videos as $yearNumber => $year) {
 <style>
 ul {
 	margin: 0;
+}
+.day {
+	display: none;
+}
 </style>
